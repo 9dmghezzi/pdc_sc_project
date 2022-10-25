@@ -1,7 +1,8 @@
-
 /**
- *
- * @author Evome
+ * Dylan Ghezzi 19078169
+ * 18/10/2022
+ * Card Class
+ * PDC Project 2
  */
 public class Card {
 
