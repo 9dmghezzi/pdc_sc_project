@@ -19,7 +19,8 @@ public class CardGameMainMenu {
                 Integer input = Integer.parseInt(menuInput.nextLine());
                 switch (input) {
                     case 1: // if 1 is entered
-                        PlayerSignUp.PlayerSignUp(); // enter player sign-up
+                        PlayerSignUp signUp = new PlayerSignUp();
+                        signUp.main(); // enter player sign-up
                         break;
                     case 2: // if 2 is entered
                         GoFishGame.GoFishGame(); // enter go fish game

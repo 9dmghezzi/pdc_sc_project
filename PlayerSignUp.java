@@ -10,11 +10,16 @@ import java.util.Scanner;
 
 public class PlayerSignUp {
 
-    public static int PlayerSignUp() {
-        HashMap<String, Integer> players = PlayerIO.playersToHashMap(); // attempt to get players from player_log.txt
+    HashMap<String, Integer> players;
+    Object playerNames[];
+
+    public PlayerSignUp() {
+        players = PlayerIO.playersToHashMap(); // attempt to get players from player_log.txt
+    }
+
+    public int main() {
         if (players != null) { // if players are successfully retrieved
             System.out.println("PLAYER SIGN-UP\n");
-            Object playerNames[];
             Scanner userInput = new Scanner(System.in);
             Integer input = 0;
 
@@ -24,11 +29,8 @@ public class PlayerSignUp {
                     input = Integer.parseInt(userInput.nextLine());
                     switch (input) {
                         case 1: // if user enters 1
-                            playerNames = players.keySet().toArray(); // get array of player names
                             System.out.println("\nPlayer List:");
-                            for (int i = 0; i < players.size(); i++) { // display each player and their wins
-                                System.out.println(i + 1 + ". " + playerNames[i] + ", " + players.get((String) playerNames[i]));
-                            }
+                            System.out.println(this.getPlayerList());
                             System.out.println("");
                             break;
                         case 2: // if user enters 2
@@ -96,5 +98,15 @@ public class PlayerSignUp {
         }
         System.out.println("Returning to Main Menu...");
         return 0; // return to main menu
+    }
+
+    public String getPlayerList() {
+        playerNames = players.keySet().toArray(); // get array of player names
+        String playerList = "";
+        for (int i = 0; i < players.size(); i++) { // display each player and their wins
+            playerList += (i + 1 + ". " + playerNames[i] + ", " + players.get((String) playerNames[i])+" wins\n");
+        }
+        
+        return playerList;
     }
 }
