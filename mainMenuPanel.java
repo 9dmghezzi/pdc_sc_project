@@ -1,5 +1,6 @@
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -33,7 +34,7 @@ public class mainMenuPanel extends javax.swing.JPanel {
         goFishButton = new javax.swing.JButton();
         quitButton = new javax.swing.JButton();
 
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         titleLabel.setText("Card Game Main Menu");
 
         signUpButton.setText("Player Sign-Up");
@@ -45,6 +46,11 @@ public class mainMenuPanel extends javax.swing.JPanel {
         });
 
         goFishButton.setText("Go Fish Game");
+        goFishButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goFishButtonActionPerformed(evt);
+            }
+        });
 
         quitButton.setText("Quit");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -60,28 +66,28 @@ public class mainMenuPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(titleLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
+                        .addGap(145, 145, 145)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(signUpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(goFishButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(quitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(74, Short.MAX_VALUE))
+                            .addComponent(quitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(titleLabel)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(8, 8, 8)
                 .addComponent(titleLabel)
-                .addGap(35, 35, 35)
-                .addComponent(signUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(signUpButton)
                 .addGap(18, 18, 18)
-                .addComponent(goFishButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(goFishButton)
                 .addGap(18, 18, 18)
                 .addComponent(quitButton)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -92,9 +98,15 @@ public class mainMenuPanel extends javax.swing.JPanel {
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:
-        CardLayout card = (CardLayout)this.getParent().getLayout();
+        CardLayout card = (CardLayout) this.getParent().getLayout();
         card.show(this.getParent(), "playerSignUp");
     }//GEN-LAST:event_signUpButtonActionPerformed
+
+    private void goFishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goFishButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout card = (CardLayout) this.getParent().getLayout();
+        card.show(this.getParent(), "cardGame");
+    }//GEN-LAST:event_goFishButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
