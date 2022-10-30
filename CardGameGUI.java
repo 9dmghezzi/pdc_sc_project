@@ -1,11 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
+import javax.swing.JOptionPane;
+
 
 /**
- *
- * @author Evome
+ * Dylan Ghezzi 19078169
+ * 27/10/2022
+ * Card Game Frame
+ * PDC Project 2
  */
 public class CardGameGUI extends javax.swing.JFrame {
 
@@ -13,6 +14,11 @@ public class CardGameGUI extends javax.swing.JFrame {
      * Creates new form CardGameGUI
      */
     public CardGameGUI() {
+        PlayerSignUp signUp = PlayerSignUp.getInstance();
+        if(signUp.getPlayers() == null) {
+            JOptionPane.showMessageDialog(this, "Failed to retrieve players from player_log.txt", "File Reading Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(0); // exit program
+        }
         initComponents();
     }
 

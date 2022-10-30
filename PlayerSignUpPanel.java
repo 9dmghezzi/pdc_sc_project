@@ -16,12 +16,8 @@ public class PlayerSignUpPanel extends javax.swing.JPanel {
      * Creates new form playerSignUpPanel
      */
     public PlayerSignUpPanel() {
+        signUp = PlayerSignUp.getInstance();
         initComponents();
-        signUp = new PlayerSignUp();
-        if (signUp.players == null) { // if players are not successfully retrieved
-            JOptionPane.showMessageDialog(this, "Failed to retrieve players from player_log.txt", "File Reading Error", JOptionPane.ERROR_MESSAGE);
-            System.exit(0); // exit program
-        }
     }
 
     /**
@@ -107,14 +103,14 @@ public class PlayerSignUpPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
-        PlayerIO.updateUsers(signUp.players); // update user list to player_log.txt
+        PlayerIO.updateUsers(signUp.getPlayers()); // update user list to player_log.txt
         JOptionPane.showMessageDialog(this, "Player list saved to player_log.txt", "Save", JOptionPane.INFORMATION_MESSAGE);
         CardLayout card = (CardLayout) this.getParent().getLayout();
         card.show(this.getParent(), "mainMenu"); // switch back to main menu
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void displayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayButtonActionPerformed
-        JOptionPane.showMessageDialog(this, signUp.getPlayerList(), "Player List", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, signUp.getPlayerListString(), "Player List", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_displayButtonActionPerformed
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
@@ -139,7 +135,7 @@ public class PlayerSignUpPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_signUpButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-       Object input = JOptionPane.showInputDialog(this, "Choose Player you wish to remove:", "Remove", JOptionPane.QUESTION_MESSAGE, null, signUp.playerNames, signUp.playerNames[0]); // pop up menu to choose player
+       Object input = JOptionPane.showInputDialog(this, "Choose Player you wish to remove:", "Remove", JOptionPane.QUESTION_MESSAGE, null, signUp.getPlayerNamesArray(), signUp.getPlayerNamesArray()[0]); // pop up menu to choose player
         if (input != null) { // if a player is chosen
             signUp.removePlayer(input.toString()); // remove selected player
             JOptionPane.showMessageDialog(this, input + " was removed", "Remove", JOptionPane.INFORMATION_MESSAGE);
