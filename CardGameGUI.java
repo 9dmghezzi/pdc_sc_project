@@ -25,9 +25,9 @@ public class CardGameGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainMenuPanel = new mainMenuPanel();
-        playerSignUpPanel = new playerSignUpPanel();
-        cardGamePanel = new cardGamePanel();
+        mainMenuPanel = new MainMenuPanel();
+        playerSignUpPanel = new PlayerSignUpPanel();
+        cardGamePanel = new CardGamePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CardGame");
@@ -75,8 +75,8 @@ public class CardGameGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private cardGamePanel cardGamePanel;
-    private mainMenuPanel mainMenuPanel;
-    private playerSignUpPanel playerSignUpPanel;
+    private CardGamePanel cardGamePanel;
+    private MainMenuPanel mainMenuPanel;
+    private PlayerSignUpPanel playerSignUpPanel;
     // End of variables declaration//GEN-END:variables
 }

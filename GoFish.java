@@ -74,9 +74,12 @@ public class GoFish extends CardGame {
     }
 
     // take a card from the stock pile if it is not empty
-    public void goFish() {
+    public boolean goFish() {
         if (!stock.getPile().empty()) {
             this.getCurrentPlayer().drawCard(stock);
+            return true;
+        } else {
+            return false;
         }
     }
 
