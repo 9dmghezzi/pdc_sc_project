@@ -1,7 +1,4 @@
 
-import javax.swing.JOptionPane;
-
-
 /**
  * Dylan Ghezzi 19078169
  * 27/10/2022
@@ -15,10 +12,6 @@ public class CardGameGUI extends javax.swing.JFrame {
      */
     public CardGameGUI() {
         PlayerSignUp signUp = PlayerSignUp.getInstance();
-        if(signUp.getPlayers() == null) {
-            JOptionPane.showMessageDialog(this, "Failed to retrieve players from player_log.txt", "File Reading Error", JOptionPane.ERROR_MESSAGE);
-            System.exit(0); // exit program
-        }
         initComponents();
     }
 

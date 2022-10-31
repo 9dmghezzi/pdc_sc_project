@@ -5,19 +5,16 @@
  * Player Sign Up Class
  * PDC Project 2
  */
-import java.util.HashMap;
 
 public class PlayerSignUp {
 
+    private PlayerDB playerDatabase;
     private static PlayerSignUp playerSignUp; // single static instance
-    private HashMap<String, Integer> players; // hash map of players
     private Object playerNames[]; // array of player names
 
     private PlayerSignUp() {
-        players = PlayerIO.playersToHashMap(); // attempt to get players from player_log.txt
-        if (players != null) {
-            playerNames = players.keySet().toArray(); // get array of player names
-        }
+        playerDatabase = new PlayerDB();
+        playerNames = playerDatabase.getNameArray(); // get array of player names
     }
     
     // get PlayerSignUp instance, only one may be created at any time (Singleton Pattern)
@@ -28,20 +25,20 @@ public class PlayerSignUp {
         
         return playerSignUp;
     }
-
-    public HashMap<String, Integer> getPlayers() {
-        return players;
-    }
     
     public Object[] getPlayerNamesArray() {
         return playerNames;
     }
     
+    public PlayerDB getPlayerDatabase() {
+        return playerDatabase;
+    }
+    
     // attempt to add new player
     public boolean addNewPlayer(String name) {
-        if (!players.containsKey(name)) { // if player is not already in the map
-            players.put(name, 0); // add player with desired name and 0 wins
-            playerNames = players.keySet().toArray(); // update player name array
+        if (playerDatabase.getUserWins(name) == -1) { // if player is not already in the map
+            playerDatabase.createNewUser(name); // add player with desired name and 0 wins
+            playerNames = playerDatabase.getNameArray(); // update player name array
             return true;
         }
         // if player already exists, do nothing
@@ -50,9 +47,9 @@ public class PlayerSignUp {
 
     // attempt to remove exisiting player
     public boolean removePlayer(String name) {
-        if (players.containsKey(name)) { // if player is in the map
-            players.keySet().remove(name); // remove player from list
-            playerNames = players.keySet().toArray(); // update player name array
+        if (playerDatabase.getUserWins(name) != -1) { // if player is in the map
+            playerDatabase.removeUser(name); // remove player from list
+            playerNames = playerDatabase.getNameArray(); // update player name array
             return true;
         } // if player is not in the map, do nothing
         return false;
@@ -62,7 +59,7 @@ public class PlayerSignUp {
     public String getPlayerListString() {
         String playerList = "";
         for (int i = 0; i < playerNames.length; i++) { // display each player and their wins
-            playerList += (i + 1 + ". " + playerNames[i] + ", " + players.get((String) playerNames[i]) + " wins\n");
+            playerList += (i + 1 + ". " + playerNames[i] + ", " + playerDatabase.getUserWins((String) playerNames[i]) + " wins\n");
         }
         return playerList;
     }

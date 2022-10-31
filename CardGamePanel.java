@@ -392,7 +392,8 @@ public class CardGamePanel extends javax.swing.JPanel {
         players = new ArrayList<>();
         if (addChosenPlayers()) { // if players are successfully chosen
             for (Player player : players) { // for each 
-                player.setWins(signUp.getPlayers().get(player.getName()));
+                player.setWins(signUp.getPlayerDatabase().getUserWins(player.getName()));
+                System.out.println(player.getWins());
             }
             goFishGame = new GoFish(players); // create new go fish game with chosen players
             goFishGame.dealCards(); // deal cards to all players
@@ -431,8 +432,20 @@ public class CardGamePanel extends javax.swing.JPanel {
                 } else { // if stock pile is empty
                     JOptionPane.showMessageDialog(this, "Stock Pile is empty", "Go Fish!", JOptionPane.INFORMATION_MESSAGE);
                 }
-                goFishGame.nextPlayer(); // move onto next player
-                updateGamePanel(); // update panel to current player
+                if (!goFishGame.roundFinished()) { // if round has not yet finished
+                    goFishGame.nextPlayer(); // move onto next player
+                    updateGamePanel(); // update panel to current player
+                } else { // if round has finished
+                    JOptionPane.showMessageDialog(this, "All books have been collected.\nRound over!", "Round end", JOptionPane.INFORMATION_MESSAGE);
+                    GoFishPlayer highestPlayer = goFishGame.checkHighestBooks(); // check for player with highest amount of books
+                    signUp.getPlayerDatabase().updateUserWins(highestPlayer.getWins() + 1, highestPlayer.getName()); // update player wins
+                    JOptionPane.showMessageDialog(this, highestPlayer.getName() + " has won with " + highestPlayer.getBooks() + " books!", "Round end", JOptionPane.INFORMATION_MESSAGE);
+                    switchToPanel("numPlayer"); // switch back to first panel for go Fish
+                    CardLayout card = (CardLayout) this.getParent().getLayout();
+                    card.show(this.getParent(), "mainMenu"); // switch back to main menu
+                    saveButton.setEnabled(false); // disable save button
+                    disableComponents(playerNameComboBox1, playerNameComboBox2, playerNameComboBox3, playerNameComboBox4, playerNameComboBox5); // reset combo boxes back to disabled
+                }
             }
         }
     }//GEN-LAST:event_FishButtonActionPerformed

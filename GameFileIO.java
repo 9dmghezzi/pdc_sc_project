@@ -42,7 +42,11 @@ public class GameFileIO {
         GoFishPlayer player = new GoFishPlayer(nameBooks[0]); // create new player with name
         player.setBooks(Integer.parseInt(nameBooks[1])); // set their books
         player.setHand(new Hand(getListOfCards(cards))); // adds previous cards to player's hand
-        PlayerIO.checkForExistingUser(player); // check for existing user
+        player.setWins(PlayerSignUp.getInstance().getPlayerDatabase().getUserWins(nameBooks[0])); // get wins from player database
+        if(player.getWins() == -1) { // if user is not in database
+            PlayerSignUp.getInstance().addNewPlayer(nameBooks[0]); // create new player with zero wins
+            player.setWins(0); // set wins to zero
+        }
         return player; // return player
     }
 
@@ -102,17 +106,5 @@ public class GameFileIO {
             cardString = cardString.substring(0, cardString.length() - 2);
         }
         return cardString; // return string of all cards
-    }
-
-    public static void main(String[] args) {
-        GoFish game = loadGoFishGameState();
-        System.out.println(game.showPlayerNames());
-        System.out.println(game.getCurrentPlayer().getWins());
-        System.out.println(game.getCurrentPlayer().getHand().toString());
-        System.out.println(((GoFishPlayer) game.getCurrentPlayer()).getBooks());
-        System.out.println(game.getDiscarded().toString());
-        System.out.println(game.getDiscarded().checkTop().toString());
-        System.out.println(game.getStock().toString());
-        System.out.println(game.getStock().checkTop().toString());
     }
 }

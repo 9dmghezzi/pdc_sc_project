@@ -103,8 +103,6 @@ public class PlayerSignUpPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
-        PlayerIO.updateUsers(signUp.getPlayers()); // update user list to player_log.txt
-        JOptionPane.showMessageDialog(this, "Player list saved to player_log.txt", "Save", JOptionPane.INFORMATION_MESSAGE);
         CardLayout card = (CardLayout) this.getParent().getLayout();
         card.show(this.getParent(), "mainMenu"); // switch back to main menu
     }//GEN-LAST:event_returnButtonActionPerformed
